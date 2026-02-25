@@ -8,7 +8,10 @@ Page Theme Toggle is a lightweight browser extension that injects custom CSS int
 
 Since this extension is loaded unpacked, you’ll need to enable Developer Mode in your browser.
 
-### Google Chrome / Brave / Edge (Chromium-based browsers)
+
+### Loading the Extension on Google Chrome / Brave / Edge (Chromium-based browsers)
+
+###  Options 1: Cloning the Repository
 
 1. Open your browser.
 2. Navigate to:
@@ -21,6 +24,11 @@ Since this extension is loaded unpacked, you’ll need to enable Developer Mode 
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked**.
 5. Select the project folder containing the extension files (where `manifest.json` is located).
+
+```bash
+git clone https://github.com/80h3m14n/theme-changer-browser-extension.git
+```
+
 6. The extension should now appear in your extensions list.
 7. (Optional) Click the puzzle icon in the toolbar and **pin** the extension for quick access.
 
@@ -28,6 +36,17 @@ If you make changes to the code:
 
 * Return to the extensions page.
 * Click **Reload** on the extension card.
+
+### Option 2: Download the ZIP
+
+- [Download the ZIP file](https://github.com/80h3m14n/theme-changer-browser-extension/releases/latest)
+- Extract the contents to a folder on your computer.
+
+```bash
+unzip page-theme-toggle-v*.zip -d theme-changer
+```
+
+- Follow the same steps as above to load the unpacked extension from that folder.
 
 ---
 
