@@ -1,43 +1,104 @@
-# Page Theme Toggle — Notes
+# Page Theme Toggle
 
-This simple browser extension injects a lightweight CSS theme into pages to provide a few selectable themes (Modern Dark, Dark Gray, Sepia, Light) and optional per-site persistence.
+Page Theme Toggle is a lightweight browser extension that injects custom CSS into web pages, allowing you to switch between several visual themes (Modern Dark, Dark Gray, Sepia, and Light). It also supports optional per-site theme persistence.
 
+---
 
+## Installation (Developer Mode)
 
-## Why some sites don't style perfectly
+Since this extension is loaded unpacked, you’ll need to enable Developer Mode in your browser.
 
-- The extension injects a single <style> element into the page's document and toggles a root class (e.g. `extension-theme-modern-dark`).
-- Some sites use powerful, highly-customized rendering pipelines (map tile canvases, WebGL layers, shadow DOM, or inline styles applied by complex JavaScript). On those pages our injected CSS can't reliably override every visual surface without breaking functionality or visibility.
-- Privileged pages (chrome://, about: pages, the extensions gallery, PDF viewer) cannot be scripted by extensions; attempts to script them will fail and the extension shows a friendly message.
+### Google Chrome / Brave / Edge (Chromium-based browsers)
 
-Examples of causes:
+1. Open your browser.
+2. Navigate to:
 
-- Canvas/WebGL map tiles: maps.google.com uses canvas/WebGL and multiple layered elements; blanket color overrides can hide map tiles or map controls if applied too aggressively.
-- Shadow DOM and isolated widgets: some components live in shadow roots, which normal CSS can't reach.
-- Inline styles with !important: pages that set inline styles with high specificity or use strong filters may override or conflict with injected CSS.
+   ```
+   chrome://extensions/
+   ```
 
-What you can do to help
+   (For Edge, use `edge://extensions/`)
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **Load unpacked**.
+5. Select the project folder containing the extension files (where `manifest.json` is located).
+6. The extension should now appear in your extensions list.
+7. (Optional) Click the puzzle icon in the toolbar and **pin** the extension for quick access.
 
-- If you find a site where the theme looks wrong (for example, Google Maps), please list it in an issue or file a quick note here and include a short description and a screenshot; that helps me add conservative, site-specific rules that don't break other pages.
-- Use the popup's "Toggle" button to remove an injected theme if it causes problems on a page.
-- Use the "Remember for this site" checkbox only when you're confident the theme works well for that hostname.
+If you make changes to the code:
 
+* Return to the extensions page.
+* Click **Reload** on the extension card.
 
-## Future updates
+---
 
-- Add a small content script that can observe and reapply safe rules after SPA navigations.
-- Provide per-site overrides (opt-out or site-specific CSS snippets) that are stored and applied automatically.
-- Offer a visual preview and a lightweight toggling mechanism that doesn't attempt to recolor canvases or WebGL layers by default.
+## Why Some Websites May Not Style Perfectly
 
-- Add several ways to change a page's theme, including:
+The extension works by:
 
-- **Injecting CSS files** via `<link>` tags into the document's `<head>`.
-- **Modifying existing styles** by updating or replacing elements in the document's `<style>` tags.
-- **Using JavaScript** to dynamically alter styles, such as changing `document.body.style` or `getComputedStyle`.
-- **Overriding default styles** by applying custom CSS rules with higher specificity.
-- **Using shadow DOM** to inject styles into components that isolate their styling.
+* Injecting a single `<style>` element into the page
+* Applying a root class (e.g., `extension-theme-modern-dark`) to toggle themes
 
+While this approach works well for most sites, certain modern web applications use advanced rendering techniques that limit how much injected CSS can safely override.
 
+### Common Limitations
 
+Some websites rely on complex rendering systems that don’t respond well to blanket CSS overrides:
 
-Thank you for testing — list any problematic sites you find and I'll add targeted, conservative fixes for them.
+* **Canvas and WebGL rendering (e.g., interactive maps)**
+  Sites like Google Maps use layered canvas/WebGL elements. Aggressive color overrides can unintentionally hide map tiles or controls.
+
+* **Shadow DOM components**
+  Some UI elements are encapsulated in shadow roots, making them inaccessible to standard global CSS rules.
+
+* **Inline styles and `!important` declarations**
+  Highly specific inline styles or strong CSS filters may conflict with or override the injected theme.
+
+* **Privileged browser pages**
+  Internal pages such as `chrome://`, `about:` pages, extension galleries, and built-in PDF viewers cannot be modified by extensions. If the extension attempts to run on these pages, it will display a friendly notice instead.
+
+---
+
+## How You Can Help
+
+If you encounter a site where the theme appears broken or unusable:
+
+* Open an issue and include:
+
+  * The website URL
+  * A brief description of the problem
+  * A screenshot (if possible)
+
+This helps ensure fixes remain targeted and don’t unintentionally affect other sites.
+
+You can also:
+
+* Use the popup’s **Toggle** button to disable the theme on a page if needed.
+* Enable **“Remember for this site”** only after confirming the theme works properly on that domain.
+
+---
+
+## Planned Improvements
+
+Upcoming enhancements may include:
+
+* A lightweight content script to detect SPA (single-page application) navigations and safely reapply theme rules.
+* Per-site customization support (opt-outs or site-specific CSS snippets stored locally).
+* A visual theme preview in the popup.
+* A more conservative toggling strategy that avoids recoloring canvas or WebGL content by default.
+
+---
+
+## Supported Styling Methods
+
+To improve compatibility across a wider range of sites, the extension may incorporate multiple theming techniques, including:
+
+* Injecting CSS files via `<link>` tags in the document `<head>`
+* Modifying or replacing existing `<style>` elements
+* Dynamically updating styles using JavaScript (e.g., `document.body.style`)
+* Applying higher-specificity CSS rules to override defaults
+* Injecting styles into Shadow DOM components when possible
+
+---
+
+Thank you for testing the extension!
+If you discover any problematic sites, please report them so targeted, conservative fixes can be added.
