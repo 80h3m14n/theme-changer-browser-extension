@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Page Theme Toggle",
+  "version": "0.1",
+  "description": "Toggle dark theme per page (injects a simple dark stylesheet).",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "action": {
+    "default_title": "Toggle Theme",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

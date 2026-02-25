@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<body style="width:260px;padding:12px;font-family:system-ui;">
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <label for="theme-select">Theme</label>
+    <select id="theme-select">
+      <option value="modern-dark">Modern Dark (blue)</option>
+      <option value="dark-gray">Dark Gray</option>
+      <option value="sepia">Sepia</option>
+      <option value="light">Light</option>
+    </select>
+
+    <label style="display:flex;align-items:center;gap:8px;">
+      <input type="checkbox" id="persist-site" />
+      <span>Remember for this site</span>
+    </label>
+
+    <div style="display:flex;gap:8px;">
+      <button id="toggle">Reset Theme</button>
+      <button id="apply">Apply</button>
+    </div>
+
+    <div id="msg" style="color:#666;font-size:12px;"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
